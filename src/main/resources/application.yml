@@ -36,7 +36,7 @@ mybatis:
   mapperLocations: classpath:com/imooc/miaosha/dao/*.xml
 #redis
 redis:
-  host: 10.8.15.124
+  host: 10.8.15.240
   port: 6379
   timeout: 3
   password: 123456
