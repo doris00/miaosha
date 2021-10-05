@@ -1,6 +1,8 @@
 package com.imooc.miaosha.service;
 
 import com.imooc.miaosha.dao.GoodsDao;
+import com.imooc.miaosha.domain.Goods;
+import com.imooc.miaosha.domain.SeckillGoods;
 import com.imooc.miaosha.vo.GoodsVo;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,11 @@ public class GoodsService {
 
     public GoodsVo getGoodsVoByGoodsId(long goodsId) {
         return goodsDao.getGoodsVoByGoodsId(goodsId);
+    }
+
+    public void reduceStock(GoodsVo goods) {
+        SeckillGoods g = new SeckillGoods();
+        g.setGoodsId(goods.getId());
+        goodsDao.reduceStock(g);
     }
 }

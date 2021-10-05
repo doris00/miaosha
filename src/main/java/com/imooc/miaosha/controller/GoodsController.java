@@ -66,7 +66,7 @@ public class GoodsController {
         model.addAttribute("miaoshaStatus", miaoshaStatus);
         model.addAttribute("remainSeconds", remainSeconds);
 
-        return "goods_list";
+        return "goods_detail";
     }
 
 }
