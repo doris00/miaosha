@@ -34,21 +34,6 @@ public class RedisService {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <T> T stringToBean(String str, Class<T> clazz) {
-        if (str == null || str.length() <= 0 || clazz == null) {
-            return null;
-        }
-        if (clazz == int.class || clazz == Integer.class) {
-            return (T) Integer.valueOf(str);
-        } else if (clazz == String.class) {
-            return (T) str;
-        } else if (clazz == long.class || clazz == Long.class) {
-            return (T) Long.valueOf(str);
-        } else {
-            return JSON.toJavaObject(JSON.parseObject(str), clazz);
-        }
-    }
 
     /**
      * 设置对象
@@ -76,6 +61,25 @@ public class RedisService {
             }
             return true;
         } finally {
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 删除
+     * @param prefix
+     * @param key
+     * @return
+     */
+    public boolean delete(KeyPrefix prefix, String key) {
+        Jedis jedis = null;
+        try {
+            jedis =  jedisPool.getResource();
+            //生成真正的key
+            String realKey  = prefix.getPrefix() + key;
+            long ret =  jedis.del(key);
+            return ret > 0;
+        }finally {
             returnToPool(jedis);
         }
     }
@@ -151,6 +155,22 @@ public class RedisService {
             return "" + value;
         } else {
             return JSON.toJSONString(value);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> T stringToBean(String str, Class<T> clazz) {
+        if (str == null || str.length() <= 0 || clazz == null) {
+            return null;
+        }
+        if (clazz == int.class || clazz == Integer.class) {
+            return (T) Integer.valueOf(str);
+        } else if (clazz == String.class) {
+            return (T) str;
+        } else if (clazz == long.class || clazz == Long.class) {
+            return (T) Long.valueOf(str);
+        } else {
+            return JSON.toJavaObject(JSON.parseObject(str), clazz);
         }
     }
 

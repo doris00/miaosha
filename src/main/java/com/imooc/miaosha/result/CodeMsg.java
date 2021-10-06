@@ -18,6 +18,7 @@ public class CodeMsg {
     public static CodeMsg MOBILE_ERROR = new CodeMsg(500212, "手机号码格式错误");
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500213, "手机号码不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500214, "密码错误");
+    public static CodeMsg SESSION_ERROR = new CodeMsg(500215, "Session不存在或者已经失效");
 
 
     //秒杀模块 5005XX
