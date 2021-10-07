@@ -87,7 +87,6 @@ function doMiaosha(){
 			layer.msg("客户端请求有误");
 		}
 	});
-
 }
 
 function render(detail){
@@ -109,11 +108,6 @@ function render(detail){
 	countDown();
 }
 
-$(function(){
-	//countDown();
-	getDetail();
-});
-
 function getDetail(){
 	var goodsId = g_getQueryString("goodsId");
 	$.ajax({
@@ -131,6 +125,12 @@ function getDetail(){
 		}
 	});
 }
+
+$(function(){
+	//countDown();
+	//console.log("zhixing");
+	getDetail();
+});
 
 function countDown(){
 	var remainSeconds = $("#remainSeconds").val();

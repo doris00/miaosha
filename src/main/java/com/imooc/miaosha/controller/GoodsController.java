@@ -131,6 +131,7 @@ public class GoodsController {
     @ResponseBody
     public Result<GoodsDetailVo> detail(HttpServletRequest request, HttpServletResponse response, Model model, SeckillUser user,
                                          @PathVariable("goodsId")long goodsId) {
+        log.info("goodsId:" + goodsId);
         GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
         long startAt = goods.getStartDate().getTime();
         long endAt = goods.getEndDate().getTime();
